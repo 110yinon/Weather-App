@@ -1,0 +1,45 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.header,#score-section{
+    text-align: center;
+}
+.header,#score-section,.quiz{
+    padding: 40px;
+}
+.header,.score{
+    color: dodgerblue;
+}
+.score{
+    font-size: 40px;
+    padding: 5px;
+}
+.question-header{
+    font-size: 35px;
+}
+#score-section{
+    display: none;
+    background-color: rgba(0,0,0,0.05);
+}
+.quiz{
+    background-color: dodgerblue;
+    color: whitesmoke;
+}
+.question{
+    padding: 10px;
+}
+.answer{
+    padding: 5px;
+    padding-left: 30px;
+    color: rgba(255,255,255,0.6);
+}
+.question>h3{
+    margin: 10px;
+}
+#submit{
+    display: block;
+    margin: 5px auto;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 20px;
+}
