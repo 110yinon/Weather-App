@@ -32,6 +32,7 @@ p{
 }
 .close{
     float: right;
+    cursor: pointer;
 }
 .todo{
     background-color: rgb(66, 62, 113);
