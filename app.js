@@ -6,6 +6,21 @@ const updateCity = async city => {
     return { cityDets, weather };
 };
 
+const checkStorage = () => {
+
+    if (localStorage.city) {
+
+        updateCity(localStorage.city)
+            .then(data => {
+                // console.log(data);
+                updateUI(data);
+            })
+            .catch(err => console.log('rejected:', err));
+    }
+};
+
+checkStorage();
+
 form.addEventListener('submit', e => {
 
     e.preventDefault();
@@ -20,4 +35,6 @@ form.addEventListener('submit', e => {
         })
         .catch(err => console.log('rejected:', err));
 
+    // stored the city in localStorage
+    localStorage.setItem('city', city);
 });
