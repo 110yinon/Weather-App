@@ -1,37 +1,46 @@
-const key = 'YF00gWs9PvODgmv406d5OLWaLWEuHQUO';
-
-// get city information
-const getCity = async city => {
-
-    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
-    const query = `?apikey=${key}&q=${city}`;
-
-    const response = await fetch(base + query);
-
-    if (response.status !== 200) {
-        throw new Error(`getCityKey: cannot fetch data, status:${response.status}`);
+class Forecast {
+    constructor() {
+        this.key = 'YF00gWs9PvODgmv406d5OLWaLWEuHQUO';
     }
+    // get city information
+    async getCity(city) {
 
-    const data = await response.json();
-    return data[0];
-};
+        const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
+        const query = `?apikey=${this.key}&q=${city}`;
 
-// get weather information
-const getWeather = async cityKey => {
+        const response = await fetch(base + query);
 
-    const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
-    const query = `${cityKey}?apikey=${key}`;
+        if (response.status !== 200) {
+            throw new Error(`getCityKey: cannot fetch data, status:${response.status}`);
+        }
 
-    const response = await fetch(base + query);
+        const data = await response.json();
+        return data[0];
+    };
 
-    if (response.status !== 200) {
-        throw new Error(`getWeather: cannot fetch data, status:${response.status}`);
-    }
+    // get weather information
+    async getWeather(cityKey) {
 
-    const data = await response.json();
-    return data[0];
-};
+        const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
+        const query = `${cityKey}?apikey=${this.key}`;
 
+        const response = await fetch(base + query);
+
+        if (response.status !== 200) {
+            throw new Error(`getWeather: cannot fetch data, status:${response.status}`);
+        }
+
+        const data = await response.json();
+        return data[0];
+    };
+
+    async updateCity(city) {
+        const cityDets = await this.getCity(city);
+        const weather = await this.getWeather(cityDets.Key);
+        return { cityDets, weather };
+    };
+
+}
 // responses of api
 
 //

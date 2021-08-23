@@ -1,16 +1,12 @@
 const form = document.querySelector('form');
 
-const updateCity = async city => {
-    const cityDets = await getCity(city);
-    const weather = await getWeather(cityDets.Key);
-    return { cityDets, weather };
-};
+const forecast = new Forecast();
 
 const checkStorage = () => {
 
     if (localStorage.city) {
 
-        updateCity(localStorage.city)
+        forecast.updateCity(localStorage.city)
             .then(data => {
                 // console.log(data);
                 updateUI(data);
@@ -28,7 +24,7 @@ form.addEventListener('submit', e => {
     const city = e.target.location.value.trim();
     form.reset();
 
-    updateCity(city)
+    forecast.updateCity(city)
         .then(data => {
             // console.log(data);
             updateUI(data);
